@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    i.material-icons(onclick="window.location.href='https://localhost/pics';",
+    | style="cursor: pointer") arrow_back
+
+    table(class="w3-table-all w3-hoverable w3-card-4 w3-centered")
+        tr
+            th Индекс
+            th Имя участника
+            th Деньги
+            th
+        - for(var i = 0; i < members.length; i++) {
+        tr
+            td= members[i].ind + 1
+            td= members[i].name
+            td= members[i].money
+            td
+                i.material-icons(onclick=``, style="cursor: pointer") delete
+        - }

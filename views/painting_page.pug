@@ -1,0 +1,35 @@
+extends layout
+
+block content
+    i.material-icons(onclick="window.location.href='https://localhost/pics';",
+    | style="cursor: pointer") arrow_back
+    table#booktable(class="w3-table-all w3-hoverable w3-card-4")
+        tr
+            th Автор
+            td
+                input#inp1(type="text", value=author, name="author")
+        tr
+            th Картина
+            td
+                input#inp2(type="text", value=name, name="name")
+        tr
+            th Описание
+            td
+                input#inp3(type="text", value=discription, name="discription")
+        tr
+            th Стартовая цена
+            td
+                input#inp4(type="number", value=startPrice, name="startPrice")
+        tr
+            th Выставлена на аукцион
+            - if (inAuct) {
+            td +
+            - } else {
+            td -
+            - }
+        - if (!inAuct) {
+        tr
+            td#auctpush(colspan=2, onclick="") Выставить на аукцион
+        - } else {
+            td#auctpop(colspan=2, onclick="") Убрать с аукциона
+        -}
