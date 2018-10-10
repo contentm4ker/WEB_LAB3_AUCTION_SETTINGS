@@ -21,6 +21,20 @@ console.log(auctMembers);
 console.log(auctTimeSetts);
 //end of loading data
 
+function getPicObjForRender(fullObj) {
+    return {
+        id: fullObj.ind,
+        name: fullObj.name,
+        author: fullObj.author,
+        discription: fullObj.discription,
+        inAuct: fullObj.inAuct,
+        startPrice: fullObj.startPrice,
+        sMin: fullObj.step.min,
+        sMax: fullObj.step.max,
+        imgPath: fullObj.imgPath
+    }
+}
+
 /* GET home page. */
 router.get('/pics', function(req, res, next) {
     res.render('index', { pics: paintings });
@@ -34,20 +48,49 @@ router.get('/pics/:num(\\d+)', function(req, res, next) {
         }
     })[0];
     console.log(painting);
-    res.render('painting_page', {
-        name: painting.name,
-        author: painting.author,
-        discription: painting.discription,
-        inAuct: painting.inAuct,
-        startPrice: painting.startPrice,
-        sMin: painting.step.min,
-        sMax: painting.step.max
-    });
+    res.render('painting_page', getPicObjForRender(painting));
 });
 
 /* GET auction members. */
 router.get('/members', function(req, res, next) {
     res.render('members', { members: auctMembers });
+});
+
+/* POST new pic info. */
+router.post('/pics/:num(\\d+)', function(req, res, next) {
+    let body = req.body;
+    let painting;
+    if (body.length === 6) {
+        if (!body.author || !body.picName || !body.discription ||
+            !body.sMin || !body.sMax || !body.startPrice.toString().match(/^\d+$/g)) {
+            res.status(400);
+            res.json({message: "Bad Request"});
+        }
+    }
+
+    for (let i = 0; i < paintings.length; i++) {
+        if (paintings[i].ind == req.params.num) {
+            if (Object.keys(body).length === 6) {
+                paintings[i].author = body.author;
+                paintings[i].name = body.picName;
+                paintings[i].discription = body.discription;
+                paintings[i].startPrice = body.startPrice;
+                paintings[i].step.min = body.sMin;
+                paintings[i].step.max = body.sMax;
+            } else if (Object.keys(body).length === 1) {
+                paintings[i].inAuct = body.inAuct !== 'true';
+            }
+            painting = paintings[i];
+            break;
+        }
+    }
+
+    if (painting) {
+        res.render('painting_page', getPicObjForRender(painting));
+    } else {
+        res.status(400);
+        res.json({message: "Bad Request"});
+    }
 });
 
 module.exports = router;

@@ -1,25 +1,28 @@
 extends layout
 
 block content
-  table(class="w3-table-all w3-hoverable w3-card-4 w3-centered")
-    tr
-      th Индекс
-      th Название
-      th Автор
-      th Участие в аукционе
-      th Начальная цена
-    - for(var i = 0; i < pics.length; i++) {
-    - var redirect=`window.location.href='https://localhost/pics/${pics[i].ind}'`;
-    tr
-      td(onclick=redirect)= pics[i].ind + 1
-      td(onclick=redirect)= pics[i].name
-      td(onclick=redirect)= pics[i].author
-      - if (pics[i].inAuct) {
-      td(onclick=redirect) +
-      - } else {
-      td(onclick=redirect) -
+  div.w3-display-topleft
+    button.w3-margin-left.w3-indigo.w3-margin-bottom.w3-btn.w3-border.w3-border-grey.w3-round-xlarge(
+    | onclick="window.location.href='https://localhost/members';") Участники аукциона
+    i.w3-margin-top.material-icons assignment_ind
+  div.w3-display-topmiddle
+    table.w3-margin-top.w3-table-all.w3-hoverable.w3-card-4.w3-centered
+      tr.w3-blue
+        th Индекс
+        th Название
+        th Автор
+        th Участие в аукционе
+        th Начальная цена
+      - for(var i = 0; i < pics.length; i++) {
+      - var redirect=`window.location.href='https://localhost/pics/${pics[i].ind}'`;
+      tr.w3-hover-blue
+        td(onclick=redirect)= pics[i].ind + 1
+        td(onclick=redirect)= pics[i].name
+        td(onclick=redirect)= pics[i].author
+        - if (pics[i].inAuct) {
+        td(onclick=redirect) +
+        - } else {
+        td(onclick=redirect) -
+        - }
+        td(onclick=redirect)= pics[i].startPrice
       - }
-      td(onclick=redirect)= pics[i].startPrice
-    - }
-  button(class="w3-btn w3-white w3-border w3-border-grey w3-round-xlarge", onclick="window.location.href='https://localhost/members';") Участники аукциона
-    i.material-icons assignment_ind
