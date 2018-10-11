@@ -6,6 +6,9 @@ var lessMiddleware = require('less-middleware');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+var membersRouter = require('./routes/members_router');
+var auctionSettsRouter = require('./routes/auction_setts_router');
+
 
 var app = express();
 
@@ -21,6 +24,8 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/', membersRouter);
+app.use('/', auctionSettsRouter);
 
 
 // catch 404 and forward to error handler
@@ -41,5 +46,5 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 module.exports.paintings = indexRouter.paintings;
-module.exports.auctMembers = indexRouter.auctMembers;
-module.exports.auctTimeSetts = indexRouter.auctTimeSetts;
+module.exports.auctMembers = membersRouter.auctMembers;
+module.exports.auctTimeSetts = auctionSettsRouter.auctTimeSetts;

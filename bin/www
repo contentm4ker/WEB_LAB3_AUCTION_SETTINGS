@@ -6,7 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('lab3-auction-of-paintings:server');
-var http = require('http');
+//var http = require('http');
 var https = require('https');
 var fs = require('fs');
 
@@ -21,7 +21,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
+//var server = http.createServer(app);
 
 /**
  * Create HTTPS server.
@@ -37,9 +37,10 @@ var serverS = https.createServer(options, app);
  * Listen on provided port, on all network interfaces.
  */
 
+/*
 server.listen(port);
 server.on('error', onError);
-server.on('listening', onListening);
+server.on('listening', onListening);*/
 
 serverS.listen(443);
 serverS.on('error', onError);
@@ -97,7 +98,7 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
+  var addr = serverS.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
@@ -109,13 +110,13 @@ function writeToFile(filepath, text) {
     const fs = require("fs");
     fs.writeFile(filepath, text, (err) => {
         if (err) throw err;
-        console.log('Books have been saved!');
+        console.log('Auction settings have been saved!');
     });
 }
 
 //saving our auction in json
 process.on('SIGINT', () => {
-    server.close(function () {
+    serverS.close(function () {
         let paintings = app.paintings;
         let auctMembers = app.auctMembers;
         let auctTimeSetts = app.auctTimeSetts;
