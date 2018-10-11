@@ -3,10 +3,11 @@ let ajaxResp = (data, status) => {
         $(document).innerHTML = data;
         location.reload();
     }
-}
+};
 
 function removeFromAuction() {
-    $.post(`/pics/${$('#pic_id').text()}`,
+    $.post(
+        `/pics/${$('#pic_id').text()}`,
         {
             inAuct: true
         },
@@ -15,7 +16,8 @@ function removeFromAuction() {
 }
 
 function addToAuction() {
-    $.post(`/pics/${$('#pic_id').text()}`,
+    $.post(
+        `/pics/${$('#pic_id').text()}`,
         {
             inAuct: false
         },
@@ -25,7 +27,8 @@ function addToAuction() {
 
 function changePicInfo() {
     $('#modal-inp').css('display', 'none');
-    $.post(`/pics/${$('#pic_id').text()}`,
+    $.post(
+        `/pics/${$('#pic_id').text()}`,
         {
             author: $('#inp1').val(),
             picName: $('#inp2').val(),

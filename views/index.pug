@@ -1,10 +1,12 @@
 extends layout
 
 block content
-  div.w3-display-topleft
+  div.w3-display-topleft.w3-margin-top.w3-margin-left
     button.w3-margin-left.w3-indigo.w3-margin-bottom.w3-btn.w3-border.w3-border-grey.w3-round-xlarge(
     | onclick="window.location.href='https://localhost/members';") Участники аукциона
-    i.w3-margin-top.material-icons assignment_ind
+    br
+    button.w3-margin-left.w3-indigo.w3-margin-bottom.w3-btn.w3-border.w3-border-grey.w3-round-xlarge(
+    | onclick="window.location.href='https://localhost/settings';") Настройки аукциона
   div.w3-display-topmiddle
     table.w3-margin-top.w3-table-all.w3-hoverable.w3-card-4.w3-centered
       tr.w3-blue

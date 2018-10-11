@@ -56,6 +56,55 @@ router.get('/members', function(req, res, next) {
     res.render('members', { members: auctMembers });
 });
 
+/* delete auction member. */
+router.post('/members/delete', function(req, res, next) {
+    let body = req.body;
+    if (!body.id.toString().match(/^\d+$/g)) {
+        res.status(400);
+        res.json({message: "Bad Request"});
+    } else {
+        auctMembers.splice(body.id, 1);
+        for (let i = 0; i < auctMembers.length; i++) {
+            auctMembers[i].ind = i;
+        }
+        res.render('members', { members: auctMembers });
+    }
+});
+
+/* add auction member. */
+router.post('/members/put/add', function(req, res, next) {
+    let body = req.body;
+    if (!body.name ||
+        !body.money.toString().match(/^\d+$/g)) {
+        res.status(400);
+        res.json({message: "Bad Request"});
+    } else {
+        auctMembers.push({
+            name: body.name,
+            money: body.money,
+            ind: auctMembers.length
+        });
+        res.render('members', { members: auctMembers });
+    }
+});
+
+/* change auction member money. */
+router.post('/members/put/change', function(req, res, next) {
+    let body = req.body;
+    if (!body.id ||
+        !body.money.toString().match(/^\d+$/g)) {
+        res.status(400);
+        res.json({message: "Bad Request"});
+    } else {
+        for (let i = 0; i < auctMembers.length; i++) {
+            if (auctMembers[i].ind == body.id) {
+                auctMembers[i].money = body.money;
+            }
+        }
+        res.render('members', { members: auctMembers });
+    }
+});
+
 /* POST new pic info. */
 router.post('/pics/:num(\\d+)', function(req, res, next) {
     let body = req.body;
@@ -93,4 +142,28 @@ router.post('/pics/:num(\\d+)', function(req, res, next) {
     }
 });
 
+/* GET settings page. */
+router.get('/settings', function(req, res, next) {
+    res.render('auct_setts', { setts: auctTimeSetts});
+});
+
+/* POST update settings */
+router.post('/settings', function(req, res, next) {
+    let body = req.body;
+    if (!body.DateTime || !body.timeout || !body.allTime || !body.researchPause) {
+        res.status(400);
+        res.json({message: "Bad Request"});
+    } else {
+        auctTimeSetts.DateTime = body.DateTime;
+        auctTimeSetts.timeout = body.timeout;
+        auctTimeSetts.researchPause = body.researchPause;
+        auctTimeSetts.allTime = body.allTime;
+        res.status(200);
+        res.json({message: "Success"});
+    }
+});
+
 module.exports = router;
+module.exports.paintings = paintings;
+module.exports.auctMembers = auctMembers;
+module.exports.auctTimeSetts = auctTimeSetts;

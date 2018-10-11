@@ -40,3 +40,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+module.exports.paintings = indexRouter.paintings;
+module.exports.auctMembers = indexRouter.auctMembers;
+module.exports.auctTimeSetts = indexRouter.auctTimeSetts;

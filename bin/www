@@ -103,3 +103,42 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+/*Saving before server exit*/
+function writeToFile(filepath, text) {
+    const fs = require("fs");
+    fs.writeFile(filepath, text, (err) => {
+        if (err) throw err;
+        console.log('Books have been saved!');
+    });
+}
+
+//saving our auction in json
+process.on('SIGINT', () => {
+    server.close(function () {
+        let paintings = app.paintings;
+        let auctMembers = app.auctMembers;
+        let auctTimeSetts = app.auctTimeSetts;
+
+        let paintingsObj = {};
+        for (let i = 0; i < paintings.length; i++) {
+            let id = paintings[i].ind;
+            delete paintings[i].ind;
+            paintingsObj[id] = paintings[i];
+        }
+
+        let auctMembersObj = {};
+        for (let i = 0; i < auctMembers.length; i++) {
+            let id = auctMembers[i].ind;
+            delete auctMembers[i].ind;
+            auctMembersObj[id] = auctMembers[i];
+        }
+
+        let auctionObj = {};
+        auctionObj["paintings"] = paintingsObj;
+        auctionObj["auctMembers"] = auctMembersObj;
+        auctionObj["auctSettings"] = auctTimeSetts;
+
+        writeToFile('data/auction_settings.json', JSON.stringify(auctionObj));
+    });
+});
