@@ -1,43 +1,43 @@
 {
-  "name": "lab3_auction_of_paintings",
+  "name": "web_lab3",
   "version": "1.0.0",
-  "description": "",
+  "description": "Лабораторная работа №3 по дисциплине \"WEB Технологии\" - \"Модуль администрирования приложения <Аукцион картин>\".",
   "main": "app.js",
-  "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.3",
-    "http-errors": "^1.7.1",
-    "less-middleware": "^3.0.1",
-    "morgan": "^1.9.1"
-  },
-  "devDependencies": {
-    "del": "^3.0.0",
-    "gulp-babel": "^8.0.0",
-    "gulp-clean-css": "^3.10.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-less": "^4.0.1",
-    "gulp-pug": "^4.0.1",
-    "gulp-rename": "^1.4.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.1",
-    "gulp4": "^4.0.2",
-    "jquery": "^3.3.1",
-    "less": "^3.8.1"
-  },
   "scripts": {
-    "start": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/destrosw/WEB_LAB3_AUCTION_OF_PAINTINGS.git"
   },
-  "author": "Grigoriev Ivan",
+  "author": "Григорьев",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/destrosw/WEB_LAB3_AUCTION_OF_PAINTINGS/issues"
+  "homepage": "https://github.com/destrosw/WEB_LAB3_AUCTION_OF_PAINTINGS#readme",
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "del": "^3.0.0",
+    "express": "^4.16.3",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-html-prettify": "0.0.1",
+    "gulp-less": "^4.0.1",
+    "gulp-pug": "^4.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.1",
+    "gulp4": "^4.0.3",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "less-middleware": "^3.0.1",
+    "morgan": "^1.9.1",
+    "prettyjson": "^1.2.1",
+    "pug": "^2.0.3"
   },
-  "homepage": "https://github.com/destrosw/WEB_LAB3_AUCTION_OF_PAINTINGS#readme"
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "gulp-imagemin": "^4.1.0"
+  }
 }

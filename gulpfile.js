@@ -4,45 +4,44 @@ const rename = require('gulp-rename');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
 const babel = require('gulp-babel');
-const imagemin = require('gulp-imagemin');
 const del = require('del');
+const imagemin = require('gulp-imagemin');
 
 const clean = () => {
     return del(['assets'])
 };
+
+gulp.task('clean', clean);
 
 function styles() {
     return gulp.src('public/stylesheets/*.less')
         .pipe(less())
         .pipe(cleanCSS())
         .pipe(rename({
-            basename: 'main',
             suffix : '.min'
         }))
-        .pipe(gulp.dest('assets/stylesheet/'));
+        .pipe(gulp.dest('assets/stylesheets/'));
 }
 
 function js() {
-    return gulp.src('static/js/*.js')
+    return gulp.src('public/javascripts/*.js')
         .pipe(babel({
-            presets : ['env']
+            presets: ['@babel/env']
         }))
         .pipe(uglify())
         .pipe(rename({
-            basename: 'main',
-            suffix : 'min'
+            suffix : '.min'
         }))
-        .pipe(gulp.dest('assets/javascript/'))
+        .pipe(gulp.dest('assets/javascripts/'));
 }
 
-function img () {
-    return gulp.src('static/img/*.*')
+function image () {
+    return gulp.src('public/images/paintings/*.*')
         .pipe(imagemin())
         .pipe(rename({
-            basename: 'main',
-            suffix : 'min'
+            suffix : '.min'
         }))
-        .pipe(gulp.dest('assets/images/'))
+        .pipe(gulp.dest('assets/img/'))
 }
 
-gulp.task('default', gulp.series(clean, gulp.parallel(styles , js, img)));
+gulp.task('default', gulp.series(clean, gulp.parallel(styles, js, image)));

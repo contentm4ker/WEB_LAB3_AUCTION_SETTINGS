@@ -7,7 +7,7 @@ block content
         table.w3-table-all.w3-hoverable.w3-card-4.w3-centered
             tr
                 th Дата и время
-                td
+                td(colspan=2)
                     input#DateTime(type="datetime-local", class="w3-input", value=setts.DateTime, required)
             tr
                 th Таймаут продажи (мин)
@@ -30,5 +30,5 @@ block content
 
         button#btn-save.w3-btn.w3-indigo.w3-large.w3-round-large.w3-margin-top(onclick="saveChanges()") Сохранить изменения
 
-    link(rel='stylesheet', href='/stylesheets/auct_setts.css')
-    script(src="/javascripts/auct_setts.js")
+    link(rel='stylesheet', href='/stylesheets/auct_setts.min.css')
+    script(src="/javascripts/auct_setts.min.js")
